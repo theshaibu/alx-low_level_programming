@@ -7,7 +7,7 @@
  * program 101-crackme
  * Return: Always 0.
  */
-int main (void)
+int main(void)
 {
 	int pass[100];
 	int i, sum, n;
@@ -30,5 +30,5 @@ int main (void)
 		}
 	}
 
-	return (0);
+	return(0);
 }
