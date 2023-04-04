@@ -1,45 +1,88 @@
 #include "lists.h"
 
 /**
- * insert_nodeint_at_index - Inserts a new node to a listint_t
- *                           list at a given position.
+ * delete_nodeint_at_index - Deletes the node at a given
+ *                           index of a listint_t list.
  * @head: A pointer to the address of the
  *        head of the listint_t list.
- * @idx: The index of the listint_t list where the new
- *       node should be added - indices start at 0.
- * @n: The integer for the new node to contain.
+ * @index: The index of the node to be deleted - indices start at 0.
  *
- * Return: If the function fails - NULL.
- *         Otherwise - the address of the new node.
+ * Return: On success - 1.
+ *         On failure - -1.
  */
-listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
+int delete_nodeint_at_index(listint_t **head, unsigned int index)
 {
-	listint_t *new, *copy = *head;
+	listint_t *tmp, *copy = *head;
 	unsigned int node;
 
-	new = malloc(sizeof(listint_t));
-	if (new == NULL)
-		return (NULL);
+	if (copy == NULL)
+		return (-1);
 
-	new->n = n;
-
-	if (idx == 0)
+	if (index == 0)
 	{
-		new->next = copy;
-		*head = new;
-		return (new);
+		*head = (*head)->next;
+		free(copy);
+		return (1);
 	}
 
-	for (node = 0; node < (idx - 1); node++)
+	for (node = 0; node < (index - 1); node++)
 	{
-		if (copy == NULL || copy->next == NULL)
-			return (NULL);
+		if (copy->next == NULL)
+			return (-1);
 
 		copy = copy->next;
 	}
 
-	new->next = copy->next;
-	copy->next = new;
-
-	return (new);
+	tmp = copy->next;
+	copy->next = tmp->next;
+	free(tmp);
+	return (1);
 }
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+"10-delete_nodeint.c" [New File]                                          
