@@ -2,31 +2,36 @@
 
 /**
  * read_textfile - reads a text file and prints the letters
+ * @file_name: filename.
+ * @num_letters: numbers of letters printed.
+ *
+ * Return: numbers of letters printed. It fails, returns 0.
  */
-ssize_t read_textfile(const char *filename, size_t letters)
+ssize_t read_textfile(const char *file_name, size_t num_letters)
 {
-	int fd;
-	ssize_t nrd, nwr;
-	char *buf;
+	int file_descriptor;
+	ssize_t bytes_read, bytes_written;
+	char *buffer;
 
-	if (!filename)
+	if (!file_name)
 		return (0);
 
-	fd = open(filename, O_RDONLY);
+	file_descriptor = open(file_name, O_RDONLY);
 
-	if (fd == -1)
+	if (file_descriptor == -1)
 		return (0);
 
-	buf = malloc(sizeof(char) * (letters));
-	if (!buf)
+	buffer = malloc(sizeof(char) * (num_letters));
+	if (!buffer)
 		return (0);
 
-	nrd = read(fd, buf, letters);
-	nwr = write(STDOUT_FILENO, buf, nrd);
+	bytes_read = read(file_descriptor, buffer, num_letters);
+	bytes_written = write(STDOUT_FILENO, buffer, bytes_read);
 
-	close(fd);
+	close(file_descriptor);
 
-	free(buf);
+	free(buffer);
 
-	return (nwr);
+	return (bytes_written);
 }
+
